@@ -1,0 +1,92 @@
+ :root{
+      --bg:#0b0f1a;
+      --glass: rgba(255,255,255,.08);
+      --glass-light: rgba(255,255,255,.14);
+      --neon:#0ef;              /* cian neón */
+      --neon-2:#8a2be2;         /* púrpura */
+      --text:#e6f0ff;
+    }
+    html { color-scheme: dark light; }
+    body{
+      margin:0; font-family: system-ui, -apple-system, Roboto, Segoe UI, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -20%, #10233f 0%, transparent 60%),
+                  radial-gradient(900px 500px at 100% 0%, #1a103b 0%, transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 16px;
+      background: linear-gradient(90deg, rgba(14,255,255,.12), rgba(138,43,226,.12));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px; }
+    .brand sl-icon{ color: var(--neon); filter: drop-shadow(0 0 6px rgba(14,255,255,.6)); }
+    .topbar-actions{ display:flex; align-items:center; gap:10px; }
+
+    /* TABS */
+    .main-tabs{ max-width:1200px; margin: 0 auto; }
+    sl-tab[slot="nav"]{ padding:12px 16px; }
+
+    /* HERO */
+    .hero{
+      position:relative; text-align:center; padding:48px 16px 24px; overflow:hidden;
+    }
+    .matrix{
+      position:absolute; inset:0; opacity:.15;
+      background-image: radial-gradient(1px 1px at 10px 10px, rgba(14,255,255,.45) 0, transparent 50%),
+                        radial-gradient(1px 1px at 30px 30px, rgba(138,43,226,.45) 0, transparent 50%);
+      background-size: 60px 60px;
+      filter: blur(.4px);
+      pointer-events:none;
+    }
+    .hero h1{
+      margin: 0 0 12px; font-size: clamp(28px, 5vw, 56px);
+      background: linear-gradient(90deg, var(--neon), var(--neon-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 0 10px rgba(14,255,255,.18);
+    }
+    .hero-sub{ opacity:.9; max-width:920px; margin:0 auto 14px; }
+    .hero-img{
+      width:min(100%, 1000px); max-height:460px; aspect-ratio:16/9; object-fit:cover;
+      border-radius:16px; margin:14px auto 16px; display:block;
+      box-shadow: 0 12px 36px rgba(0,0,0,.4);
+      outline: 2px solid rgba(14,255,255,.2);
+    }
+    .glass{
+      width:min(100%, 1000px); margin: 10px auto 0; padding: 16px;
+      background: var(--glass); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; backdrop-filter: blur(10px);
+    }
+
+    /* GRID TARJETAS */
+    .search-row{ max-width:1200px; margin:8px auto; padding:0 16px; }
+    .grid{ max-width:1200px; margin:16px auto 70px; padding:0 16px;
+      display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
+    .card--tech{
+      backdrop-filter: blur(6px); background: var(--glass-light);
+      border-radius:16px; border: 1px solid rgba(255,255,255,.12);
+    }
+    .card--tech sl-button { margin-top:10px; }
+    .tags{ margin-top:10px; display:flex; gap:6px; flex-wrap:wrap; }
+
+    /* CONTACTO */
+    .contact-card{ display:block; }
+    .contact-img{
+      width:100%; max-width:520px; display:block; margin: 8px auto 16px;
+      border-radius:12px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+    .contact-title{ display:flex; align-items:center; gap:8px; color:var(--neon); margin:0; }
+    .contact-sep{
+      height:0; border-top:2px solid var(--neon); border-bottom:2px solid var(--neon-2);
+      margin: 10px 0 16px;
+    }
+
+    /* Animaciones */
+    @keyframes fadeUp{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+    .grid > *{ animation: fadeUp .35s ease both; }

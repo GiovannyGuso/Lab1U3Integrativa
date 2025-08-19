@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechHub PWA – Tendencias & Recursos</title>
+
+  <!-- Shoelace (Web Components) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/light.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/dark.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <!-- Iconos (Bootstrap Icons para <sl-icon>) -->
+  <script type="module">
+    import { registerIconLibrary } from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/utilities/icon-library.js";
+    registerIconLibrary("bi", {
+      resolver: name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/${name}.svg`,
+      mutator: svg => svg.setAttribute("fill", "currentColor")
+    });
+  </script>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#0ef"/>
+  <link rel="icon" href="./assets/icon-192.png" type="image/png"/>
+
+  <!-- Estilos -->
+
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <sl-icon library="bi" name="cpu"></sl-icon>
+      <span>TechHub • PWA</span>
+    </div>
+    <div class="topbar-actions">
+      <sl-switch id="themeToggle" size="small" title="Tema oscuro/claro">
+        <sl-icon slot="checked-icon"  library="bi" name="moon-stars"></sl-icon>
+        <sl-icon slot="unchecked-icon" library="bi" name="sun"></sl-icon>
+      </sl-switch>
+      <sl-button id="installBtn" size="small" style="display:none">
+        <sl-icon slot="prefix" library="bi" name="download"></sl-icon>
+        Instalar App
+      </sl-button>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <sl-tab-group placement="start" class="main-tabs">
+    <sl-tab slot="nav" panel="inicio" active><sl-icon library="bi" name="house-door"></sl-icon>&nbsp;Inicio</sl-tab>
+    <sl-tab slot="nav" panel="tendencias"><sl-icon library="bi" name="graph-up-arrow"></sl-icon>&nbsp;Tendencias</sl-tab>
+    <sl-tab slot="nav" panel="recursos"><sl-icon library="bi" name="folder2-open"></sl-icon>&nbsp;Recursos</sl-tab>
+    <sl-tab slot="nav" panel="faq"><sl-icon library="bi" name="question-circle"></sl-icon>&nbsp;FAQ</sl-tab>
+    <sl-tab slot="nav" panel="contacto"><sl-icon library="bi" name="envelope"></sl-icon>&nbsp;Contacto</sl-tab>
+
+    <!-- INICIO -->
+    <sl-tab-panel name="inicio" active>
+      <section class="hero">
+        <div class="matrix"></div>
+        <h1>Explora el futuro: IA, Cloud, Web y más</h1>
+        <p class="hero-sub">Una PWA de tecnología, Instálala, úsala offline y mantente al día.</p>
+        <img src="./assets/hero-tech.jpg" alt="Ilustración tecnología futurista" class="hero-img" loading="lazy">
+        <div class="glass">
+          <sl-alert variant="primary" open>
+            <sl-icon slot="icon" library="bi" name="lightning-charge-fill"></sl-icon>
+            <strong>Tecnología:</strong> IA, Cloud, Web y más.
+          </sl-alert>
+        </div>
+      </section>
+    </sl-tab-panel>
+
+    <!-- TENDENCIAS (cards con badges) -->
+    <sl-tab-panel name="tendencias">
+      <section class="grid">
+        <sl-card class="card--tech">
+          <h3 slot="header">Inteligencia Artificial</h3>
+          Modelos generativos, visión, NLP y MLOps.
+          <div class="tags">
+            <sl-badge variant="success" pill>IA</sl-badge>
+            <sl-badge variant="primary" pill>GenAI</sl-badge>
+            <sl-badge variant="neutral" pill>MLOps</sl-badge>
+          </div>
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/whitepaper-ai.pdf" target="_blank">Whitepaper</sl-button>
+        </sl-card>
+
+        <sl-card class="card--tech">
+          <h3 slot="header">Computación en la Nube</h3>
+          Arquitecturas serverless, contenedores y FinOps.
+          <div class="tags">
+            <sl-badge variant="primary" pill>Cloud</sl-badge>
+            <sl-badge variant="neutral" pill>Serverless</sl-badge>
+          </div>
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/guia-cloud.pdf" target="_blank">Guía</sl-button>
+        </sl-card>
+
+        <sl-card class="card--tech">
+          <h3 slot="header">Desarrollo Web</h3>
+          PWAs, Web Components y performance.
+          <div class="tags">
+            <sl-badge variant="warning" pill>PWA</sl-badge>
+            <sl-badge variant="success" pill>WCs</sl-badge>
+          </div>
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/receta-pwa.pdf" target="_blank">Receta PWA</sl-button>
+        </sl-card>
+
+        <sl-card class="card--tech">
+          <h3 slot="header">Seguridad</h3>
+          Zero-Trust, autenticación moderna y cifrado.
+          <div class="tags">
+            <sl-badge variant="danger" pill>Sec</sl-badge>
+            <sl-badge variant="neutral" pill>Zero-Trust</sl-badge>
+          </div>
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/checklist-sec.pdf" target="_blank">Checklist</sl-button>
+        </sl-card>
+      </section>
+    </sl-tab-panel>
+
+    <!-- RECURSOS (buscador + cards con PDF) -->
+    <sl-tab-panel name="recursos">
+      <div class="search-row">
+        <sl-input id="searchRes" placeholder="Buscar recurso…" clearable>
+          <sl-icon slot="prefix" library="bi" name="search"></sl-icon>
+        </sl-input>
+      </div>
+      <section class="grid" id="resGrid">
+        <sl-card class="card--tech" data-name="aprender pwa offline">
+          <h3 slot="header">Aprende PWA Offline</h3>
+          Conceptos clave de caché, SW y manifest.
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/aprender-pwa.pdf" target="_blank">Abrir PDF</sl-button>
+        </sl-card>
+
+        <sl-card class="card--tech" data-name="web components guia">
+          <h3 slot="header">Web Components – Guía</h3>
+          Custom elements, Shadow DOM y slots.
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/wc-guia.pdf" target="_blank">Abrir PDF</sl-button>
+        </sl-card>
+
+        <sl-card class="card--tech" data-name="checklist performance web">
+          <h3 slot="header">Checklist de Performance</h3>
+          Medición, Core Web Vitals y optimizaciones.
+          <sl-button slot="footer" variant="primary" size="small" href="./assets/perf-checklist.pdf" target="_blank">Abrir PDF</sl-button>
+        </sl-card>
+      </section>
+    </sl-tab-panel>
+
+    <!-- FAQ (acordeones) -->
+    <sl-tab-panel name="faq">
+      <section class="glass" style="margin:16px auto; max-width:1000px; padding:16px">
+        <h2 style="margin-top:0">Preguntas frecuentes</h2>
+        <sl-details summary="¿Cómo instalo la PWA?">
+          Usa el botón <em>Instalar App</em> del encabezado (aparece cuando el navegador lo permite).
+        </sl-details>
+        <sl-details summary="¿Funciona sin internet?">
+          Sí. El <em>Service Worker</em> guarda en caché el App Shell y recursos clave.
+        </sl-details>
+        <sl-details summary="¿Puedo abrir los PDFs offline?">
+          Si los abriste al menos una vez online o los precacheaste en el SW, sí.
+        </sl-details>
+      </section>
+    </sl-tab-panel>
+
+    <!-- CONTACTO -->
+    <sl-tab-panel name="contacto">
+      <section class="glass" style="margin:16px auto; max-width:900px; padding:16px">
+        <sl-card class="contact-card">
+          <img src="./assets/contacto-tech.jpg" class="contact-img" alt="Soporte TechHub">
+          <h2 slot="header" class="contact-title">
+            <sl-icon library="bi" name="chat-dots"></sl-icon> Soporte & Contacto
+          </h2>
+          <div class="contact-sep" aria-hidden="true"></div>
+          <sl-input id="name" label="Nombre"></sl-input>
+          <sl-input id="email" type="email" label="Email"></sl-input>
+          <sl-textarea id="msg" label="Mensaje"></sl-textarea>
+          <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px">
+            <sl-button id="sendBtn" variant="primary">
+              <sl-icon slot="prefix" library="bi" name="send"></sl-icon> Enviar
+            </sl-button>
+          </div>
+        </sl-card>
+      </section>
+      <sl-alert id="toast" closable duration="2500" style="position:fixed; right:16px; bottom:16px"></sl-alert>
+    </sl-tab-panel>
+  </sl-tab-group>
+  <script defer src="./app.js"></script>
+</body>
+</html>
